@@ -133,35 +133,35 @@ const Dashboard = memo(function Dashboard() {
   }, [validateFile]); // Added validateFile to dependencies
 
   const handleAnalyze = async () => {
-    if (!uploadedFile) return;
-    setIsAnalyzing(true);
+  if (!uploadedFile) return;
+  setIsAnalyzing(true);
 
-    try {
-      const formData = new FormData();
-      formData.append('resume', uploadedFile);
+  try {
+    const formData = new FormData();
+    formData.append('resume', uploadedFile);
 
-      const response = await fetch('http://localhost:5000/api/analyze', {
-        method: 'POST',
-        body: formData
-      });
+    const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/analyze`, {
+      method: 'POST',
+      body: formData
+    });
 
-      const data = await response.json();
+    const data = await response.json();
 
-      if (data.success) {
-        localStorage.setItem('resumeAnalysis', JSON.stringify(data.data));
-        toast.success('🎉 Resume analyzed successfully!');
-        router.push('/results');
-      } else {
-        toast.error(`❌ ${data.error}`);
-      }
-
-    } catch (error) {
-      console.error('Error:', error);
-      toast.error('❌ Failed to analyze resume. Please try again.');
-    } finally {
-      setIsAnalyzing(false);
+    if (data.success) {
+      localStorage.setItem('resumeAnalysis', JSON.stringify(data.data));
+      toast.success('🎉 Resume analyzed successfully!');
+      router.push('/results');
+    } else {
+      toast.error(`❌ ${data.error}`);
     }
-  };
+
+  } catch (error) {
+    console.error('Error:', error);
+    toast.error('❌ Failed to analyze resume. Please try again.');
+  } finally {
+    setIsAnalyzing(false);
+  }
+};
 
   const handleRemoveFile = () => {
     setUploadedFile(null);
@@ -481,3 +481,4 @@ const MenuIcon = ({ isDarkMode }) => (
 );
 
 export default Dashboard;
+
