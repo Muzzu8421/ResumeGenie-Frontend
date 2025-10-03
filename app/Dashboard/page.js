@@ -5,6 +5,7 @@ import { memo, useState, useEffect, useCallback } from "react";
 import { toast, ToastContainer, Bounce } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useRouter } from 'next/navigation';
+import Image from 'next/image';
 
 const Dashboard = memo(function Dashboard() {
   const router = useRouter();
@@ -27,7 +28,8 @@ const Dashboard = memo(function Dashboard() {
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
-  const validateFile = (file) => {
+  // Wrap validateFile in useCallback to fix dependency issues
+  const validateFile = useCallback((file) => {
     const validTypes = [
       'application/pdf',
       'application/msword',
@@ -79,7 +81,7 @@ const Dashboard = memo(function Dashboard() {
     });
 
     return true;
-  };
+  }, [isDarkMode]);
 
   const handleDragEnter = useCallback((e) => {
     e.preventDefault();
@@ -118,7 +120,7 @@ const Dashboard = memo(function Dashboard() {
         setUploadedFile(file);
       }
     }
-  }, [isDarkMode]);
+  }, [validateFile]); // Added validateFile to dependencies
 
   const handleFileInput = useCallback((e) => {
     const files = e.target.files;
@@ -128,7 +130,7 @@ const Dashboard = memo(function Dashboard() {
         setUploadedFile(file);
       }
     }
-  }, [isDarkMode]);
+  }, [validateFile]); // Added validateFile to dependencies
 
   const handleAnalyze = async () => {
     if (!uploadedFile) return;
@@ -146,12 +148,8 @@ const Dashboard = memo(function Dashboard() {
       const data = await response.json();
 
       if (data.success) {
-        // Store results in localStorage
         localStorage.setItem('resumeAnalysis', JSON.stringify(data.data));
-
         toast.success('🎉 Resume analyzed successfully!');
-
-        // Navigate to results page
         router.push('/results');
       } else {
         toast.error(`❌ ${data.error}`);
@@ -164,7 +162,6 @@ const Dashboard = memo(function Dashboard() {
       setIsAnalyzing(false);
     }
   };
-
 
   const handleRemoveFile = () => {
     setUploadedFile(null);
@@ -213,7 +210,7 @@ const Dashboard = memo(function Dashboard() {
             <div className="flex items-center justify-between px-4 h-14 border-b border-inherit">
               <div className="flex items-center">
                 <div className="w-10 h-10 rounded-lg flex items-center justify-center">
-                  <img src="favicon.ico" alt="Logo" />
+                  <Image src="/favicon.ico" alt="Logo" width={40} height={40} />
                 </div>
                 <span className={`font-semibold text-sm ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>ResumeGenie</span>
               </div>
@@ -448,7 +445,7 @@ const Dashboard = memo(function Dashboard() {
   );
 });
 
-// Icon Components (same as before)
+// Icon Components
 const NavItem = ({ icon, label, active, isDarkMode }) => (
   <button className={`w-full cursor-pointer flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition-colors ${active
     ? 'bg-[#784592] text-white'
@@ -462,12 +459,6 @@ const NavItem = ({ icon, label, active, isDarkMode }) => (
 const HomeIcon = () => (
   <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
-  </svg>
-);
-
-const ChartIcon = () => (
-  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
   </svg>
 );
 
