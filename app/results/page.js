@@ -1,22 +1,19 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export default function ResultsPage() {
   const router = useRouter();
-  const searchParams = useSearchParams();
   const [results, setResults] = useState(null);
   const [isDarkMode, setIsDarkMode] = useState(true);
 
   useEffect(() => {
-    // Get results from localStorage (passed from dashboard)
     const storedResults = localStorage.getItem('resumeAnalysis');
     if (storedResults) {
       setResults(JSON.parse(storedResults));
     } else {
-      // Redirect back if no results
       router.push('/Dashboard');
     }
   }, [router]);
@@ -94,7 +91,6 @@ export default function ResultsPage() {
 
         {/* Score Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-8">
-          {/* Overall Score */}
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -115,7 +111,6 @@ export default function ResultsPage() {
             <div className={`absolute top-0 right-0 w-32 h-32 ${getScoreColor(results.overallScore)} opacity-5 rounded-full blur-3xl`}></div>
           </motion.div>
 
-          {/* ATS Score */}
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -166,7 +161,6 @@ export default function ResultsPage() {
                   </span>
                 </div>
                 
-                {/* Progress Bar */}
                 <div className={`w-full h-2 rounded-full overflow-hidden mb-3 ${isDarkMode ? 'bg-white/10' : 'bg-gray-200'}`}>
                   <motion.div
                     initial={{ width: 0 }}
@@ -179,7 +173,6 @@ export default function ResultsPage() {
                   />
                 </div>
 
-                {/* Issues */}
                 {data.issues && data.issues.length > 0 && (
                   <div className="mt-3">
                     <p className={`text-sm font-medium mb-2 ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>
@@ -299,7 +292,6 @@ export default function ResultsPage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {/* Present Keywords */}
             <div>
               <h3 className={`font-semibold mb-4 text-green-500`}>
                 Present Keywords ({results.keywords.present.length})
@@ -316,7 +308,6 @@ export default function ResultsPage() {
               </div>
             </div>
 
-            {/* Missing Keywords */}
             <div>
               <h3 className={`font-semibold mb-4 text-red-500`}>
                 Missing Keywords ({results.keywords.missing.length})
