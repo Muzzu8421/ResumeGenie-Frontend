@@ -22,7 +22,7 @@ const cards = [
     subtitle: "Built from Experience",
     description: "ResumeGenie was born from a simple observation: talented individuals were missing opportunities because their resumes didn't pass through Applicant Tracking Systems. We built a solution combining cutting-edge AI with recruitment expertise.",
     quote: {
-      text: "After struggling with countless job applications, I realized the system was broken. That's when I decided to create ResumeGenie—a tool that gives everyone access to professional-grade resume optimization.",
+      text: "After struggling with countless job applications, I realized the system was broken. That&apos;s when I decided to create ResumeGenie—a tool that gives everyone access to professional-grade resume optimization.",
       author: "Founder, ResumeGenie Team",
     },
   },
@@ -63,7 +63,6 @@ const StickyCard = ({ i, title, icon, subtitle, description, highlights, quote, 
           scale,
           top: `calc(-5vh + ${i * 20 + 50}px)`,
         }}
-        // Reduced backdrop-blur for better performance
         className={`rounded-4xl relative -top-1/4 flex origin-top flex-col overflow-hidden bg-gradient-to-br from-white/10 to-white/5 ${
           isMobile ? 'backdrop-blur-md' : 'backdrop-blur-xl'
         } border border-white/20 shadow-2xl w-[90%] sm:w-[85%] md:w-[75%] lg:w-[700px] xl:w-[900px] min-h-[400px] sm:min-h-[450px] md:min-h-[500px] p-6 sm:p-8 md:p-10 lg:p-12`}
@@ -106,7 +105,7 @@ const StickyCard = ({ i, title, icon, subtitle, description, highlights, quote, 
           <div className={`bg-white/5 rounded-2xl p-5 sm:p-6 md:p-8 border border-white/10 ${
             isMobile ? '' : 'backdrop-blur-sm'
           }`}>
-            <p className="font-inter text-sm sm:text-base text-white/80 italic mb-4">"{quote.text}"</p>
+            <p className="font-inter text-sm sm:text-base text-white/80 italic mb-4">&quot;{quote.text}&quot;</p>
             <p className="font-inter text-xs sm:text-sm text-white font-semibold">— {quote.author}</p>
           </div>
         )}
