@@ -22,7 +22,7 @@ const cards = [
     subtitle: "Built from Experience",
     description: "ResumeGenie was born from a simple observation: talented individuals were missing opportunities because their resumes didn't pass through Applicant Tracking Systems. We built a solution combining cutting-edge AI with recruitment expertise.",
     quote: {
-      text: "After struggling with countless job applications, I realized the system was broken. That&apos;s when I decided to create ResumeGenie—a tool that gives everyone access to professional-grade resume optimization.",
+      text: "After struggling with countless job applications, I realized the system was broken. That's when I decided to create ResumeGenie—a tool that gives everyone access to professional-grade resume optimization.",
       author: "Founder, ResumeGenie Team",
     },
   },
@@ -105,7 +105,9 @@ const StickyCard = ({ i, title, icon, subtitle, description, highlights, quote, 
           <div className={`bg-white/5 rounded-2xl p-5 sm:p-6 md:p-8 border border-white/10 ${
             isMobile ? '' : 'backdrop-blur-sm'
           }`}>
-            <p className="font-inter text-sm sm:text-base text-white/80 italic mb-4">&quot;{quote.text}&quot;</p>
+            <p className="font-inter text-sm sm:text-base text-white/80 italic mb-4">
+              &ldquo;{quote.text}&rdquo;
+            </p>
             <p className="font-inter text-xs sm:text-sm text-white font-semibold">— {quote.author}</p>
           </div>
         )}
@@ -163,10 +165,10 @@ const AboutSection = () => {
 
   return (
     <section id="about" className="relative w-full">
-      {/* Fixed background that doesn't scroll or stretch */}
+      {/* Fixed background */}
       <div className="fixed inset-0 w-full h-screen bg-gradient-to-br from-[#784592] via-[#4C3178] to-[#21225F] -z-10" />
       
-      {/* Simplified background decoration - also fixed */}
+      {/* Background decoration */}
       {!isMobile && (
         <div className="fixed inset-0 overflow-hidden pointer-events-none -z-10">
           <div className="absolute top-1/4 right-0 w-96 h-96 bg-purple-400/10 rounded-full blur-3xl"></div>
@@ -175,7 +177,9 @@ const AboutSection = () => {
       )}
 
       <div className="relative z-20 text-center pt-16 sm:pt-20 md:pt-28 pb-4 sm:pb-6 md:pb-8 px-4">
-        <h2 className="font-playfair text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 sm:mb-6">About ResumeGenie</h2>
+        <h2 className="font-playfair text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 sm:mb-6">
+          About ResumeGenie
+        </h2>
         <p className="font-inter text-sm sm:text-base md:text-lg lg:text-xl text-white/90 max-w-2xl mx-auto">
           Transforming job seekers into dream candidates with AI-powered resume optimization
         </p>
