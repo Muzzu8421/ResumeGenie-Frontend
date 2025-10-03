@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { memo } from "react";
+import Image from "next/image";
 
 const Footer = memo(function Footer() {
   const fadeInUp = {
@@ -26,7 +27,7 @@ const Footer = memo(function Footer() {
           {/* Brand */}
           <motion.div {...fadeInUp} className="col-span-2 md:col-span-1 space-y-4">
             <div className="flex items-center">
-              <span className="w-18"><img src="favicon.ico" alt="Logo" /></span>
+              <span className="w-18"><Image className="w-20" src="/favicon.ico" alt="Logo" width={80} height={80} /></span>
               <span className="font-inter text-lg font-bold">ResumeGenie</span>
             </div>
             <p className="font-inter text-sm text-gray-300 leading-relaxed max-w-xs">

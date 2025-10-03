@@ -54,7 +54,7 @@ const HeroWithNavbar = memo(function HeroWithNavbar() {
         <nav className={`absolute top-0 left-0 right-0 z-50 w-full px-4 sm:px-6 lg:px-8 sm:py-2 transition-all duration-700 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4"}`}>
           <div className="max-w-7xl mx-auto flex items-center justify-between">
             <div className="flex items-center group cursor-pointer">
-              <span className="transform group-hover:scale-110 transition-transform duration-300"><img className="w-20" src="favicon.ico" alt="Logo" /></span>
+              <span className="transform group-hover:scale-110 transition-transform duration-300"><Image className="w-20" src="/favicon.ico" alt="Logo" width={80} height={80} /></span>
               <span className="font-inter text-gray-50 font-semibold text-base sm:text-lg lg:text-xl tracking-tight">ResumeGenie</span>
             </div>
 
